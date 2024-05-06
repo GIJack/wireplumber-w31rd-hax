@@ -11,5 +11,5 @@ class _lib_meta:
     lib_ver = "0.1.0"
 
 class default_var:
-    hax_dirs               = ['/usr/share/wireplumber-w31rd-hax','/usr/local/share/wireplumber-w31rd-hax']
+    config_dirs            = ['/usr/share/wireplumber-w31rd-hax','/usr/local/share/wireplumber-w31rd-hax']
     wireplumber_config_dir = "%s/.config/wireplumber/wireplumber.conf.d/" % os.getenv("HOME")
