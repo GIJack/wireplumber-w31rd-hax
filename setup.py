@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from setuptools import setup
+import os,sys
 
 #read from requirements.txt
 f = open('requirements.txt','r')
@@ -9,6 +10,19 @@ for item in f.readlines():
     item = item.rstrip('\n')
     dep_list.append(item)
 f.close()
+
+added_files = []
+if 'linux' in sys.platform or 'freebsd' in sys.platform or 'openbsd' in sys.platform:
+    ## TODO: uncomment these when the manpage and GUI is written
+    #added_files.append(('share/wwh/'    , ['wwh-qt.ui']))
+    #added_files.append(('share/applications/', ['desktop/wireplumber_w31rd_hax.desktop']))
+    #added_files.append(('share/man/man1/'    , ['man/wwh-cli.1']))
+    #added_files.append(('share/bash-completion/completions/', ['bash-completion/wwh-cli.py']))
+    configs = os.listdir('configs')
+    added_files.append(('share/wireplumber-w31rd-hax/',configs))
+else:
+    message_line = "%s: unsupported platform." % sys.platform
+    sys.exit(2)
 
 setup(name='wireplumber-w31rd-hax',
       version='0.1.0',
