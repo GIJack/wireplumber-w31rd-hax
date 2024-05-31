@@ -53,8 +53,11 @@ def get_available_configs(file_list):
                 # replace #@META slug with the filename, and add None for enabled
                 meta_line[0] = file
                 meta_line.append( is_enabled(file) ) # Check if this is symlinked
+                
+                # object transform
+                item_obj = config_item(meta_line)
                 # Now add the object to the list.
-                return_object.append(meta_line)
+                return_object.append(item_obj)
             
         # Now return
         return(return_obj)
@@ -113,3 +116,49 @@ def load_available_configs():
     config_object = get_available_configs(config_files)
     return(config_object)
     
+def enable_config(filename):
+    '''Enable a config'''
+    
+    #check
+    if is_valid_config(filename) != True:
+        warn_line = "Not a valid config: %s" % filename
+        warn(warn_line)
+        return "invalid"
+    if is_enabled(filename) == True:
+        return "ok"
+        
+    #DO THE THING
+    filename_basename  = os.path_basename(filename)
+    symlink_filename   = "%s/%s" % (default_var.user_config_dir,filename_basename)
+    try:
+        os.symlink(filename,symlink_filename)
+    except:
+        warn_line = "Could not create symlink: %s" % symlink_filename
+        warn(warn_line)
+        return "failed"
+    else:
+        return "ok"
+        
+def disable_config(filename):
+    '''disable a config'''
+    
+    #check
+    if is_valid_config(filename) != True:
+        warn_line = "Not a valid config: %s" % filename
+        warn(warn_line)
+        return "invalid"
+    if is_enabled(filename) == False:
+        return "ok"
+        
+    #DO THE THING
+    filename_basename  = os.path_basename(filename)
+    symlink_filename   = "%s/%s" % (default_var.user_config_dir,filename_basename)
+
+    try:
+        os.remove(symlink_filename)
+    except:
+        warn_line == "Could not delete symlink: %s" % symlink_filename
+        warn(warn_line)
+        return "failed"
+    else:
+        return "ok"
