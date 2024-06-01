@@ -171,7 +171,7 @@ def restart_services():
     services = ['wireplumber', 'pipwire']
     
     for item in services:
-        exit_code = subprocess.check_call(['systemctl','restart','--user',service])
+        exit_code = subprocess.check_call(['systemctl','restart','--user',item])
         if exit_code != 0:
             warn_line = "could not restart: %s"
             warn(warn_line)
