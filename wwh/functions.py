@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 def warn(message):
-    message = "tor_util_cli: %s%s¡WARN!:%s %s" % (colors.yellow, colors.bold, colors.reset, message)
-    print("tor_util_cli:" + colors.yellow + colors.bold + "¡WARN!: " + colors.reset + message, file=sys.stderr)
+    message = "wwh: %s%s¡WARN!:%s %s" % (colors.yellow, colors.bold, colors.reset, message)
+    print("wwh:" + colors.yellow + colors.bold + "¡WARN!: " + colors.reset + message, file=sys.stderr)
     return
 
 def list_config_files():
