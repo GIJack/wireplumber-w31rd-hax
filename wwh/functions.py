@@ -169,12 +169,14 @@ def disable_config(filename):
 def restart_services():
     '''restart pipewire and wireplumber systemd units to reflect new config'''
     services = ['wireplumber', 'pipwire']
-    
+    failures = 0
     for item in services:
         exit_code = subprocess.check_call(['systemctl','restart','--user',item])
         if exit_code != 0:
             warn_line = "could not restart: %s"
             warn(warn_line)
-            return "failed"
-        else:
-            return "ok"
+            failures += 1
+    if failures >= 1:
+        return "failed"
+    else
+        return "ok"
