@@ -175,3 +175,6 @@ def restart_services():
         if exit_code != 0:
             warn_line = "could not restart: %s"
             warn(warn_line)
+            return "failed"
+        else:
+            return "ok"
