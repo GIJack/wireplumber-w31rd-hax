@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+import os,sys
+import subprocess
+
 def warn(message):
     message = "wwh: %s%s¡WARN!:%s %s" % (colors.yellow, colors.bold, colors.reset, message)
     print("wwh:" + colors.yellow + colors.bold + "¡WARN!: " + colors.reset + message, file=sys.stderr)
@@ -162,3 +165,13 @@ def disable_config(filename):
         return "failed"
     else:
         return "ok"
+        
+def restart_services():
+    '''restart pipewire and wireplumber systemd units to reflect new config'''
+    services = ['wireplumber', 'pipwire']
+    
+    for item in services:
+        exit_code = subprocess.check_call(['systemctl','restart','--user',service])
+        if exit_code != 0:
+            warn_line = "could not restart: %s"
+            warn(warn_line)
