@@ -15,5 +15,5 @@ class config_item:
     def __str__(self):
         return(self.filename)
     def __repr__(self):
-        out_line = "<wwd config item %s:%s>" % (self.title,self.filename)
+        out_line = "<wwh config item %s:%s>" % (self.title,self.filename)
         return(out_line)
