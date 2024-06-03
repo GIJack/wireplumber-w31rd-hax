@@ -6,6 +6,7 @@ Common python library for GUI and CLI
 '''
 
 import os,sys
+import subprocess
 
 class _lib_meta:
     lib_ver = "0.1.0"
@@ -19,8 +20,8 @@ class colors:
     reset='\033[0m'
     bold='\033[01m'
     yellow='\033[93m'
-    
+
+from .print import *
 from .object_types import *
 from .functions import *
-
 

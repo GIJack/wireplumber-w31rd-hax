@@ -3,11 +3,6 @@
 import os,sys
 import subprocess
 
-def warn(message):
-    message = "wwh: %s%s¡WARN!:%s %s" % (colors.yellow, colors.bold, colors.reset, message)
-    print("wwh:" + colors.yellow + colors.bold + "¡WARN!: " + colors.reset + message, file=sys.stderr)
-    return
-
 def list_config_files():
     '''Get list of available configs, return as list'''
     
