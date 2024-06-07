@@ -66,7 +66,7 @@ def cli_enable_config(config_name,terse=False):
             print_line = "Hax Enabled: %s" % config.name
             message(print_line)
         elif return_status == "failed":
-            print_line = "Could Not Enable %s" % config.name
+            print_line = "Could Not Enable Hax: %s" % config.name
         elif return_status == "invalid":
             print_line = "Hax Not Available: %s" % config.name
         else:
