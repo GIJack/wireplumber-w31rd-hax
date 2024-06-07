@@ -90,12 +90,12 @@ def main():
         sys.exit(4)
     
     if args.command == "list":
-        cli_list_configs()
+        cli_list_configs(args.terse)
     elif args.command == "enable":
         # Get the first argument as config name, perhaps in the future we might
         # allow multiple enable/disable at the same time
         config_name = parser.arguments[0]
-        cli_enable_config(config_name)
+        cli_enable_config(config_name,args.terse)
 
 if __name__ == "__main__":
     main()
