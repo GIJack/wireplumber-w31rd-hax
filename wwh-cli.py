@@ -42,6 +42,38 @@ def cli_list_configs(terse=False):
             print(out_line)
         else:
             raise "terse is neither true nor false, should not be here. debug app"
+            
+def cli_enable_config(config_name,terse=False):
+    '''Enable a config file. takes config name and optionally terse'''
+    
+    # First, get the right config option
+    file_name = None
+    available_configs = load_available_configs()
+    for config in availbale_configs:
+        if config.title == config_name:
+            file_name = config.filename
+    # Check if not found
+    if file_name == None:
+        error_line = "No Such Hax: %s" % config_name
+        exit_with_error(2,error_line)
+    
+    # Enable the config
+    return_status = enable_config(file_name)
+
+    # Check Exit Code And Print
+    if terse == False:
+        if return_status == "ok":
+            print_line = "Hax Enabled: %s" % config.name
+            message(print_line)
+        elif return_status == "failed":
+            print_line = "Could Not Enable %s" % config.name
+        elif return_status == "invalid":
+            print_line = "Hax Not Available: %s" % config.name
+        else:
+            raise "Enable: no such return status %s. Error, should not be here, debug" % return_status
+    elif terse == True:
+        print(return_status)
+    
 
 def main():
     parser = argparse.ArgumentParser(description=app_desc,epilog="\n\n",add_help=False,formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -59,6 +91,11 @@ def main():
     
     if args.command == "list":
         cli_list_configs()
+    elif args.command == "enable":
+        # Get the first argument as config name, perhaps in the future we might
+        # allow multiple enable/disable at the same time
+        config_name = parser.arguments[0]
+        cli_enable_config(config_name)
 
 if __name__ == "__main__":
     main()
