@@ -119,8 +119,6 @@ def enable_config(filename):
     
     #check
     if is_valid_config(filename) != True:
-        warn_line = "Not a valid config: %s" % filename
-        warn(warn_line)
         return "invalid"
     if is_enabled(filename) == True:
         return "ok"
@@ -131,8 +129,6 @@ def enable_config(filename):
     try:
         os.symlink(filename,symlink_filename)
     except:
-        warn_line = "Could not create symlink: %s" % symlink_filename
-        warn(warn_line)
         return "failed"
     else:
         return "ok"
@@ -142,8 +138,6 @@ def disable_config(filename):
     
     #check
     if is_valid_config(filename) != True:
-        warn_line = "Not a valid config: %s" % filename
-        warn(warn_line)
         return "invalid"
     if is_enabled(filename) == False:
         return "ok"
